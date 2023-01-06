@@ -1,0 +1,19 @@
+<%- include('./includes/head.ejs') %>
+<%- include('./includes/navbar.ejs') %>
+<main>
+    <div class="container">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title"><%= user.name %></h5>
+              <p class="card-text"><%= user.email %></p>
+              <p class="card-text"><%= user.gender %></p>
+              <p class="card-text"><%= user.birth_date %></p>
+              <p class="card-text"><%= user.signup_time %></p>
+              <p class="card-text"><%= user.username %></p>
+              <p class="card-text"><%= user.introduction %></p>
+              <a href="/admin/user" class="btn btn-primary">Back To UserList</a>
+            </div>
+        </div>
+    </div>
+</main>
+<%- include('./includes/end.ejs') %>
