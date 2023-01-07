@@ -6,7 +6,7 @@ exports.getAllUsers = (req, res, next) => {
         res.render('user-profile',{
             users: rows,
             title : 'userList',
-            isLoggedIn : req.session.loggedIn,
+
         });
     })
     .catch(err=>{
@@ -25,7 +25,6 @@ exports.getUserDetail = (req, res, next) => {
         res.render('user-detail',{
             title:'userList',
             user:user[0],
-            isLoggedIn : req.session.loggedIn,
         })
     })
     .catch(err=>{

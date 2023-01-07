@@ -20,7 +20,6 @@ const transporter = nodemailer.createTransport(
 exports.getAddUser = (req, res, next) => {
     res.render('add-user',{
         title: 'addUser',
-        isLoggedIn : req.session.loggedIn,
     });
 }
 
@@ -45,7 +44,6 @@ exports.postAddUser = (req, res, next) => {
     })
     .then(result => {
         res.redirect('/login');
-
         return transporter.sendMail({
             from: 'qazwsx5219430630@gmail.com',
             to:email,
@@ -105,4 +103,10 @@ exports.postLogout = (req,res, next) => {
         console.log(err);
         res.redirect('/login');
     });
+}
+
+exports.getReset = (req, res, next) => {
+    res.render('reset',{
+        title: 'reset password',
+    })
 }

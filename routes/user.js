@@ -29,6 +29,8 @@ router.post('/login', authController.postLogin);
 
 router.post('/logout', authController.postLogout);
 
+router.get('/reset', authController.getReset);
+
 // 使用者詳細資訊
 router.get('/user/:user_id', userController.getUserDetail);
 module.exports = router;

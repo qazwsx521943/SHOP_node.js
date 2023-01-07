@@ -1,14 +1,12 @@
 exports.getProducts = (req,res,next) => {
     res.render('shop', {
         title: 'product',
-        isLoggedIn : req.session.loggedIn,
     });
 };
 
 exports.getAddProduct = (req, res, next) => {
     res.render('add-product',{
         title:'addProduct',
-        isLoggedIn : req.session.loggedIn,
     });
 };
 

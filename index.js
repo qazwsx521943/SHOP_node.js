@@ -42,6 +42,11 @@ app.use(session({
     // cookie:{maxAge:1_000_000}
 }));
 
+app.use((req,res, next) => {
+    res.locals.isLoggedIn = req.session.loggedIn;
+    next();
+})
+
 // routes middleware
 app.use(adminRoutes);
 app.use(shopRoutes);
