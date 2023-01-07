@@ -29,4 +29,9 @@ module.exports = class Users{
         return db.execute(sql, [id]);
     }
 
+    static findByEmail(userEmail){
+        const sql = "SELECT * FROM user_profile WHERE user_profile.email = ?";
+        return db.query(sql, [userEmail]);
+    }
+
 }

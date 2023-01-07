@@ -9,12 +9,17 @@ dotenv.config();
 
 const session = require('express-session');
 
+const MysqlStore = require('express-mysql-session')(session);
+
 const db = require('./util/database');
+// Store session in MySQL
+const sessionStore = new MysqlStore({}, db);
+
 
 const app = express();
 
 // routes import
-const adminRoutes = require('./routes/admin');
+const adminRoutes = require('./routes/user');
 const shopRoutes = require('./routes/shop');
 
 
@@ -27,26 +32,25 @@ app.set('view engine','ejs');
 // middleware for parsing forms
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
-app.unsubscribe(session({
+app.use(session({
     secret:'mysecret', // for production this should be an encrypted string
     resave: false,
     saveUninitialized: false,
+    store: sessionStore,
     // cookie:{maxAge:1_000_000}
-}))
+}));
 
 // routes middleware
-app.use( '/admin', adminRoutes);
+app.use(adminRoutes);
 app.use(shopRoutes);
 
-app.use('/temp', (req,res) => {
-    res.render('temp');
-})
 
 
 // catch 404 error Page
 app.use((req, res, next) => {
     res.status(404).render('404',{
-        title:'404'
+        title:'404',
+        isLoggedIn: req.session.loggedIn,
     });
 })
 

@@ -11,22 +11,27 @@
                     <a class="nav-link <%= title === 'product' ? 'active' : '' %>" aria-current="page" href="/">Product</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link <%= title === 'addProduct' ? 'active' : '' %>" href="/admin/add-product">Add Product</a>
+                    <a class="nav-link <%= title === 'addProduct' ? 'active' : '' %>" href="/add-product">Add Product</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link <%= title === 'userList' ? 'active' : '' %>" href="/admin/user">Users</a>
+                    <a class="nav-link <%= title === 'userList' ? 'active' : '' %>" href="/user">Users</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link <%= title === 'addUser' ? 'active' : '' %>" href="/admin/add-user">add user</a>
+                    <a class="nav-link <%= title === 'addUser' ? 'active' : '' %>" href="/add-user">add user</a>
                   </li>
                 </ul>
                 <ul class="navbar-nav mb-2 mb-lg-0">
+                    <% if(!isLoggedIn) { %>
                     <li class="nav-item">
-                        <a class="nav-link <%= title === 'login' ? 'active' : '' %>" href="/admin/login">Login</a>
+                        <a class="nav-link <%= title === 'login' ? 'active' : '' %>" href="/login">Login</a>
                     </li>
+                    <% } else { %>
                     <li class="nav-item">
-                        <a class="nav-link <%= title === 'logout' ? 'active' : '' %>" href="/admin/logout">Log Out</a>
+                        <form action="/logout" method="post">
+                            <button type="submit">Logout</button>
+                        </form>
                     </li>
+                    <% } %>
                 </ul>
                 <!-- <form class="d-flex">
                   <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
