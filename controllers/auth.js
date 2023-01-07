@@ -1,6 +1,21 @@
 const bcrypt = require('bcryptjs');
 
+const nodemailer = require('nodemailer');
+
 const User = require('../models/user');
+
+const transporter = nodemailer.createTransport(
+    {
+        service: 'gmail',
+        auth: {
+          user: 'qazwsx5219430630@gmail.com', // generated ethereal user
+          pass: 'zavybkktpuybjoxx', // generated ethereal password
+        },
+      }
+);
+
+
+
 
 exports.getAddUser = (req, res, next) => {
     res.render('add-user',{
@@ -30,6 +45,14 @@ exports.postAddUser = (req, res, next) => {
     })
     .then(result => {
         res.redirect('/login');
+
+        return transporter.sendMail({
+            from: 'qazwsx5219430630@gmail.com',
+            to:email,
+            subject: 'SignUp Confirm',
+            html: '<h1>You successfully signed up!</h1>'
+        })
+        .catch(err=> console.log(err));
     })
     .catch(err=>console.log(err));
     
